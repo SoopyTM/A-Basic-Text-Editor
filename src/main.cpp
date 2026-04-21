@@ -2,17 +2,22 @@
 #include <ncurses.h>
 #include <vector>
 #include <algorithm>
+#include <filesystem>
 
 #include "classes-file.h"
 
 int main(int argc, char** argv) {
   if (argc != 2) {
-    std::cout << "Enter the file and only the file you want to create/edit." << std::endl;
+    std::cout << "Enter the file and only the file you want to create." << std::endl;
     return 0;
   }
   ScreenStuff ScreenObject;
 
-  ScreenObject.LoadFromFile(argv[1]);
+  if (std::filesystem::exists(argv[1])) {
+    std::cout << "The file you want to create already exists. Please enter a file that doesn't exist." << std::endl;
+    return 0;
+  }
+
   ScreenObject.StartScreen();
 
   std::vector<int> AllowedSpecialCharacters = {24, 19, 10, 127, 8, 9};

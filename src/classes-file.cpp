@@ -1,17 +1,6 @@
 #include <ncurses.h>
 #include "classes-file.h"
 
-void ScreenStuff::LoadFromFile(std::string WantedFile) {
-  std::ifstream file(WantedFile);
-  FileString = "";
-  std::string line;
-  while (std::getline(file, line)) {
-    FileString += line;
-    FileString += '\n';
-  }
-  file.close();
-}
-
 void ScreenStuff::StartScreen() {
   initscr();
   raw();
@@ -21,13 +10,15 @@ void ScreenStuff::StartScreen() {
 
 void ScreenStuff::DoBackspace() {
   if (!FileString.empty()) {
-    FileString.pop_back();
-    int y, x;
-    getyx(stdscr, y, x);
-
-    if (x > 0) {
-      move(y, x - 1);
-      delch();
+    if (FileString.back() != '\n') {
+      FileString.pop_back();
+      int y, x;
+      getyx(stdscr, y, x);
+  
+      if (x > 0) {
+        move(y, x - 1);
+        delch();
+      }
     }
   }
 }
