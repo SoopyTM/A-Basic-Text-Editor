@@ -9,6 +9,7 @@ class ScreenStuff {
   public:
     void LoadFromFile(std::string WantedFile);
     void StartScreen();
+    void DoBackspace();
     void SaveFileIntoFileString(char UserInput);
     void SaveToFile(std::string WantedFile);
 };

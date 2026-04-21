@@ -1,5 +1,7 @@
 #include <iostream>
 #include <ncurses.h>
+#include <vector>
+#include <algorithm>
 
 #include "classes-file.h"
 
@@ -13,28 +15,40 @@ int main(int argc, char** argv) {
   ScreenObject.LoadFromFile(argv[1]);
   ScreenObject.StartScreen();
 
+  std::vector<int> AllowedSpecialCharacters = {24, 19, 10, 127, 8};
+
   while (1) {
-    char UserInput = getch();
+    int UserInput = getch();
 
-    if (UserInput == 24) {
-      endwin();
-      return 0;
+    if (UserInput >= 32 || UserInput == KEY_BACKSPACE || std::find(AllowedSpecialCharacters.begin(), AllowedSpecialCharacters.end(), UserInput) != AllowedSpecialCharacters.end()) {
+      switch (UserInput) {
+        case 24:
+          endwin();
+          return 0;
+  
+        case 19:
+          ScreenObject.SaveToFile(argv[1]);
+          continue;
+     
+        case 10:
+          ScreenObject.SaveFileIntoFileString('\n');
+          printw("\n");
+          break;
+        
+        case KEY_BACKSPACE:
+        case 127:
+        case 8:
+          ScreenObject.DoBackspace();
+          break;
+  
+        default:
+          ScreenObject.SaveFileIntoFileString(UserInput);
+          printw("%c", UserInput);
+          break;
+      }
+  
+      refresh();
     }
-
-    if (UserInput == 19) {
-      ScreenObject.SaveToFile(argv[1]);
-      continue;
-    }
-
-    if (UserInput == 10) {
-      ScreenObject.SaveFileIntoFileString('\n');
-      printw("\n");
-    } else {
-      ScreenObject.SaveFileIntoFileString(UserInput);
-      printw("%c", UserInput);
-    }
-
-    refresh();
   }
 
   endwin();

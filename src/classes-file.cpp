@@ -19,6 +19,19 @@ void ScreenStuff::StartScreen() {
   keypad(stdscr, TRUE);
 }
 
+void ScreenStuff::DoBackspace() {
+  if (!FileString.empty()) {
+    FileString.pop_back();
+    int y, x;
+    getyx(stdscr, y, x);
+
+    if (x > 0) {
+      move(y, x - 1);
+      delch();
+    }
+  }
+}
+
 void ScreenStuff::SaveFileIntoFileString(char UserInput) {
   FileString += UserInput;
 }
