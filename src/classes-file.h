@@ -11,5 +11,6 @@ class ScreenStuff {
     void StartScreen();
     void DoBackspace();
     void SaveFileIntoFileString(char UserInput);
+    void InsertTab();
     void SaveToFile(std::string WantedFile);
 };

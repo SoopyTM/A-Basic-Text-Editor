@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
   ScreenObject.LoadFromFile(argv[1]);
   ScreenObject.StartScreen();
 
-  std::vector<int> AllowedSpecialCharacters = {24, 19, 10, 127, 8};
+  std::vector<int> AllowedSpecialCharacters = {24, 19, 10, 127, 8, 9};
 
   while (1) {
     int UserInput = getch();
@@ -33,6 +33,11 @@ int main(int argc, char** argv) {
         case 10:
           ScreenObject.SaveFileIntoFileString('\n');
           printw("\n");
+          break;
+
+        case KEY_STAB:
+        case 9:
+          ScreenObject.InsertTab();
           break;
         
         case KEY_BACKSPACE:

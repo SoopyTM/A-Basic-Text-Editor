@@ -36,6 +36,11 @@ void ScreenStuff::SaveFileIntoFileString(char UserInput) {
   FileString += UserInput;
 }
 
+void ScreenStuff::InsertTab() {
+  FileString += "  ";
+  printw("  ");
+}
+
 void ScreenStuff::SaveToFile(std::string WantedFile) {
   std::ofstream file(WantedFile);
   file << FileString;
