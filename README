@@ -1,9 +1,7 @@
 This is just a random text editor i felt like making. We'll see if we finish it. :D
 
-You need ncurses to run this. I can't remember if you need to install it in some way, but i just thought it would be useful to know.
+You need ncurses to build this. I can't remember if you need to install it in some way, but i just thought it would be useful to know.
 
 The Makefile uses g++, so you will need that aswell.
 
-Current tasks are in the TODO file.
-
-When i say basic, i mean basic. All you can do is open a file, edit text, save the file (CTRL + S), and exit (CTRL + X).
+When i say basic, i mean basic. All you can do is create a file, edit text, save the file (CTRL + S), and exit (CTRL + X).
