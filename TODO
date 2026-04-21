@@ -1,1 +1,3 @@
 Add the ability to do Tabs.
+Open a file and display the contents so it can be edited.
+Add the ability to move the cursor to different positions in the file (gonna be a pain. Have to rewrite how i add text to the string)
